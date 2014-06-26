@@ -5,18 +5,13 @@ wp read func GHCN
 
 **Description**
 
-Functions for reading GHCN (version 3) data and meta data
+Functions for reading GHCN data and meta data
 
 **Usage**
 
-- README Link: ftp://ftp.ncdc.noaa.gov/pub/data/ghcn/v3/README
-- Data Link: ftp://ftp.ncdc.noaa.gov/pub/data/ghcn/v3/
-
-
-call functions:
-
-- output data <- readGHCNdata(_path to datafile_)
-- output meta <- readGHCNmeta(_path to datafile_)
+call functions
+wp_read_func_GHCN_dat: reads the data
+wp_read_func_GHCN_inv: reads meta data
 
 **Input**
 
@@ -26,38 +21,32 @@ path of data (.dat) file
 
 initialize functions
 
-
-**Example**
-
-datapath <- "/Users/[USER]/ownCloud/RWorkbench/WiPro2014/rawData/ghcnm.v3.2.2.20140506/ghcnm.tavg.v3.2.2.20140506.qca.dat"
-
-- T_avg_meta <- readGHCNmeta(datapath)
-- T_avg_data <- readGHCNdata(datapath)
-
-
-
 **Author**
 
 AlK
 
 **Date**
 
-MaO 11.08.2014: test and minor change in the documentation header
-AlK 08.05.2014: first version
+08.05.2014
 
 **TODO**
 
 - nix
 
-### 1. read data information
+Functions for reading GHCN data and meta
+=========================================
+
+1. read data information
+------------------------
+only the path of the GHCN data file (.dat) is required as input!
 
 ```{r}
-readGHCNdata <- function(datapath) {
+wp_read_func_GHCN_dat <- function(datapath) {
   
 data<-readLines(datapath)
 ```
 
-Ab hier noch nicht so richtig schön... geht kürzer, aber nicht schneller .. :)
+ab hier noch nicht so richtig schön... geht kürzer, aber nicht schneller .. :)
 
 ```{r}
 ID  <- substr(data,1,11)
@@ -123,6 +112,11 @@ VALUE12      <- as.numeric(substr(data,108,112))/100.   # transform to °C (see 
 DMFLAG12      <- substr(data,113,113)   
 QCFLAG12      <- substr(data,114,114)     
 DSFLAG12      <- substr(data,115,115)  
+```
+
+hier fehlen (noch) die anderen Daten .. Flag, etc..
+
+```{r}
 
 datatable <- data.frame(ID,YEAR,ELEMENT,
                         VALUE1,DMFLAG1,QCFLAG1,DSFLAG1,
@@ -146,20 +140,20 @@ return(datatable)
 
 ```
 
-### 2. read meta information
-
-Only the path of the GHCN data file (.dat) is required as input!
+2. read meta information
+------------------------
+only the path of the GHCN data file (.dat) is required as input!
 
 ```{r}
-readGHCNmeta <- function(datapath) {
+wp_read_func_GHCN_inv <- function(datapath) {
 metapath <- paste0(substr(datapath,1,nchar(datapath)-3),'inv')
 
 metadata<-readLines(metapath)
 ```
 
-- as.() .. converts to selected datatype
-- gsub .. removes empty spaces
-- substr .. cuts data from character input (input, from, to)
+as.() .. convert to selected datatype
+gsub .. remove empty spaces
+substr .. cut data from character input (input, from, to)
 
 ```{r}
 ID          <- substr(metadata,1,11)
@@ -187,3 +181,6 @@ return(metatable)
 }
 
 ```
+
+END Functions for reading GHCN data and meta #######
+
