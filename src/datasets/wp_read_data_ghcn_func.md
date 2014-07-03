@@ -13,12 +13,12 @@ ftp://ftp.ncdc.noaa.gov/pub/data/ghcn/v3/README
 data<-wp_read_data_ghcn_func(filepath)
 
 **Input**
+datapath: absolute file path
 
-datatable: data frame
 
 **Output**
+datatable: data frame
 
-initialize functions
 
 **Author**
 
