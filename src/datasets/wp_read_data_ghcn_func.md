@@ -35,9 +35,9 @@ MaO
 Es fehlen (noch) die anderen Daten .. Flag, etc..
 
 ```{r}
-wp_read_func_GHCN_dat <- function(filepath) {
+wp_read_data_ghcn_func <- function(filepath) {
   
-data<-readLines(datapath)
+data<-readLines(filepath)
 ```
 
 ab hier noch nicht so richtig schön... geht kürzer, aber nicht schneller .. :)
