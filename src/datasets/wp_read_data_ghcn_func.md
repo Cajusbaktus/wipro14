@@ -13,7 +13,7 @@ ftp://ftp.ncdc.noaa.gov/pub/data/ghcn/v3/README
 data<-wp_read_data_ghcn_func(filepath)
 
 **Input**
-datapath: absolute file path
+filepath: absolute file path
 
 
 **Output**
@@ -35,7 +35,7 @@ MaO
 Es fehlen (noch) die anderen Daten .. Flag, etc..
 
 ```{r}
-wp_read_func_GHCN_dat <- function(datapath) {
+wp_read_func_GHCN_dat <- function(filepath) {
   
 data<-readLines(datapath)
 ```
