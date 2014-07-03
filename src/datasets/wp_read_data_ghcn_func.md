@@ -28,6 +28,7 @@ MaO
 **Date**
 
 08.05.2014
+03.07.2014: MaO -split in to function (read data and read meta) + documentation
 
 **TODO**
 
