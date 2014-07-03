@@ -32,14 +32,7 @@ MaO
 
 **TODO**
 
-- nix
-
-Functions for reading GHCN data
-=========================================
-
-1. read data information
-------------------------
-only the path of the GHCN data file (.dat) is required as input!
+Es fehlen (noch) die anderen Daten .. Flag, etc..
 
 ```{r}
 wp_read_func_GHCN_dat <- function(datapath) {
