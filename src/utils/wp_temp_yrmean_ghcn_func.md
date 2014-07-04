@@ -27,7 +27,7 @@ outdata (data frame)
 
 **Example**
 
-out <- wp_ghcn_yr_mean(ghcn_month,clino=T,valid_clino_yr=25)
+max_clino<-wp_temp_yrmean_ghcn_func(data, agg_meth='max')
 
 **Author**
 
