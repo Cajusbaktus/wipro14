@@ -11,11 +11,12 @@ or clino (climatological normals) time span of stations that have complete data 
 
 **Usage**
 library(reshape)
-MEAN <- wp_ghcn_yr_mean(data, SD=TRUE/FALSE, clino=TRUE/FALSE, valid_clino_yr)
+MEAN <- wp_temp_yrmean_ghcn_func(data, SD=TRUE/FALSE, clino=TRUE/FALSE, valid_clino_yr)
 
-Default: - SD       = F (standard deviation, logical)
-         - sub      = c(1961,1990) (user defined time span default is clino, numeric)
-         - valid_yr =  100 (percentage of minimum valid years, numerical)
+Default:-agg_meth:mean (default) aggrigation method of monthly means for annual mean 
+                  (options other than default: 'sd', 'max','min', character)  
+        - sub    :c(1961,1990) (user defined time span default is clino, numeric)
+        - valid  :100 (percentage of minimum valid years, numeric)
 
 **Input**
 
@@ -42,7 +43,7 @@ MaO 03.07.2014 improved code (base version of Moh)
 
 ```{r}
 
-wp_temp_yrmean_ghcn_func <- function(data, SD=FALSE, sub=c(1960,1991),valid_yr=100) {
+wp_temp_yrmean_ghcn_func <- function(data, sub=c(1961,1990),valid=100, agg_meth = 'mean') {
 
 data <- subset(data, YEAR >= sub[1] & YEAR <= sub[2])  
 
@@ -50,11 +51,22 @@ cnt_yrs<-  sub[2]-sub[1]
 
 molted_data<- melt(data, id.vars= c("ID","YEAR"), measure.vars=c("VALUE1","VALUE2","VALUE3","VALUE4","VALUE5","VALUE6","VALUE7","VALUE8","VALUE9","VALUE10","VALUE11","VALUE12"))
 
-not_valid_months_stations <- cast(molted_data, ID~variable,function(x) cnt_yrs-length(x))
-
-
-
-
+if (agg_meth == 'sd'){
+             outdata <- subset(apply(cast(molted_data, ID~variable,mean),1,sd),
+                apply(cast(molted_data, ID~variable,function(x) sum(!is.na(x))/((cnt_yrs+1)*0.01)),1,mean) == valid)
+} 
+if(agg_meth == 'max'){ 
+            outdata <- subset(apply(cast(molted_data, ID~variable,mean),1,max),
+              apply(cast(molted_data, ID~variable,function(x) sum(!is.na(x))/((cnt_yrs+1)*0.01)),1,mean) == valid)
+} 
+if(agg_meth == 'min'){ 
+            outdata <- subset(apply(cast(molted_data, ID~variable,mean),1,min),
+              apply(cast(molted_data, ID~variable,function(x) sum(!is.na(x))/((cnt_yrs+1)*0.01)),1,mean) == valid)
+}  
+if(agg_meth == 'mean'){
+              outdata <- subset(apply(cast(molted_data, ID~variable,mean),1,mean),
+                apply(cast(molted_data, ID~variable,function(x) sum(!is.na(x))/((cnt_yrs+1)*0.01)),1,mean) == valid)
+}
 
 return(outdata)
 
