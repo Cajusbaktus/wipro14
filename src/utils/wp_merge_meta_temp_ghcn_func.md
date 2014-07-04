@@ -24,6 +24,8 @@ merged$OCNDIS[merged$OCNDIS<=0] <- NA
 merged$TOWNDIS[merged$TOWNDIS<=0] <- NA
 merged$STNELEV[merged$STNELEV<=0] <- NA
 
+return(merged)
+
 }
 
 ```
