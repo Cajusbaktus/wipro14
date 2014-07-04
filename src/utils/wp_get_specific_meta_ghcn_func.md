@@ -7,13 +7,11 @@ meta: meata data output from wp_read_meta_ghcn_func (data frame)
 
 ```{r}
 
-
 wp_get_specific_meta_ghcn -<function(temp, meta){
-
 
 merged<-merge(temp,meta,by.x = c("stationid"), by.y=c("ID"))
   
-merged$temperature<-(as.numeric(as.character((merged$temperature))))
+merged$temperature<-(as.numeric(as.character((merged$temperaure))))
 merged$POPCLS<-as.factor(merged$POPCLS)
 merged$TOPO  <-as.factor(merged$TOPO)
 merged$STVEG <-as.factor(merged$STVEG)
