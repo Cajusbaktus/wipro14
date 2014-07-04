@@ -1,12 +1,15 @@
-**Name**
-wp_merge_meta_temp_ghcn_func
+####################################################################################################################
+## Name**
+# wp_merge_meta_temp_ghcn_func
+#
+## Input**
+# temp: mean temp data - output from wp_temp_yrmean_ghcn_func (named numeric)
+# meta: meata data output from wp_read_meta_ghcn_func (data frame)
+#
+#
+####################################################################################################################
 
-**Input**
-temp: mean temp data - output from wp_temp_yrmean_ghcn_func (named numeric)
-meta: meata data output from wp_read_meta_ghcn_func (data frame)
-```{r}
-
-wp_merge_meta_temp_ghcn_func -<function(temp, meta){
+wp_merge_meta_temp_ghcn_func <-function(temp, meta){
 
 merged<-merge(temp,meta,by.x = c("stationid"), by.y=c("ID"))
   
@@ -27,8 +30,3 @@ merged$STNELEV[merged$STNELEV<=0] <- NA
 return(merged)
 
 }
-
-```
-
-
-

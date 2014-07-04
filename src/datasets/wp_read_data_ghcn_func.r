@@ -1,48 +1,46 @@
-**Name**
+#######################################################################################################################
+#
+##Name**
+#
+# wp_read_data_ghcn_func
+#
+# Description**
+#
+# Functions for reading GHCN data
+# More information see:
+# ftp://ftp.ncdc.noaa.gov/pub/data/ghcn/v3/README
+#
+##Usage** 
+#
+# data<-wp_read_data_ghcn_func(filepath)
+#
+# Input**
+# filepath: absolute file path
+#
+# Output**
+# datatable: data frame
+#
+##Author**
+#AlK
+#MaO
+#
+#Date**
+#
+#08.05.2014
+#03.07.2014: MaO -split in to function (read data and read meta) + documentation
+#
+##TODO**
+#
+#Es fehlen (noch) die anderen Daten .. Flag, etc..
+#####################################################################################################################
 
-wp_read_data_ghcn_func
-
-**Description**
-
-Functions for reading GHCN data
-More information see:
-ftp://ftp.ncdc.noaa.gov/pub/data/ghcn/v3/README
-
-**Usage** 
-
-data<-wp_read_data_ghcn_func(filepath)
-
-**Input**
-filepath: absolute file path
-
-
-**Output**
-datatable: data frame
-
-
-**Author**
-
-AlK
-MaO
-
-**Date**
-
-08.05.2014
-03.07.2014: MaO -split in to function (read data and read meta) + documentation
-
-**TODO**
-
-Es fehlen (noch) die anderen Daten .. Flag, etc..
-
-```{r}
 wp_read_data_ghcn_func <- function(filepath) {
   
 data<-readLines(filepath)
-```
 
-ab hier noch nicht so richtig schön... geht kürzer, aber nicht schneller .. :)
 
-```{r}
+#ab hier noch nicht so richtig schön... geht kürzer, aber nicht schneller .. :)
+
 ID  <- substr(data,1,11)
 YEAR <- as.integer(substr(data,12,15))
 ELEMENT     <- substr(data,16,19)
@@ -106,11 +104,7 @@ VALUE12      <- as.numeric(substr(data,108,112))/100.   # transform to °C (see 
 DMFLAG12      <- substr(data,113,113)   
 QCFLAG12      <- substr(data,114,114)     
 DSFLAG12      <- substr(data,115,115)  
-```
 
-hier fehlen (noch) die anderen Daten .. Flag, etc..
-
-```{r}
 
 datatable <- data.frame(ID,YEAR,ELEMENT,
                         VALUE1,DMFLAG1,QCFLAG1,DSFLAG1,
@@ -131,5 +125,3 @@ datatable[datatable==-99.99] <- NA       # Exclude missing values
 
 return(datatable)
 }
-
-```
