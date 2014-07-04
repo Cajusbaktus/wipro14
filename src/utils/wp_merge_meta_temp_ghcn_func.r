@@ -13,7 +13,7 @@ wp_merge_meta_temp_ghcn_func <-function(temp, meta){
 
 merged<-merge(temp,meta,by.x = c("stationid"), by.y=c("ID"))
   
-merged$temperature<-(as.numeric(as.character((merged$temperaure))))
+merged$temperature<-(as.numeric(as.character((merged$temperature))))
 merged$POPCLS<-as.factor(merged$POPCLS)
 merged$TOPO  <-as.factor(merged$TOPO)
 merged$STVEG <-as.factor(merged$STVEG)

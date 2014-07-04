@@ -7,6 +7,13 @@ set the workindirektory to the local repository as root level (change this!)
 setwd("d:\\TUB\\Lehre\\SoSe14\\wiPro\\wipro14")
 ```
 
+activate packages needed (install if functions are missin)
+
+```{r}
+library(ggplot2)
+library(reshape)
+```
+
 source the functions needed
 
 ```{r}
@@ -40,6 +47,6 @@ http://www.statmethods.net/advgraphs/ggplot2.html
 http://www.r-bloggers.com/basic-introduction-to-ggplot2/
 
 ```{r}
-qplot(temp_meta$LATTITUTE, temp_me)
+qplot(sqrt(temp_meta$LATITUDE^2), temp_meta$temperature)
 ```
 
