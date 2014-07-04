@@ -68,6 +68,9 @@ if(agg_meth == 'mean'){
                 apply(cast(molted_data, ID~variable,function(x) sum(!is.na(x))/((cnt_yrs+1)*0.01)),1,mean) == valid)
 }
 
+stationid  <-names(outdata)
+temperature <- as.vector(outdata)
+outdata     <- data.frame(cbind(stationid,temperature))
 return(outdata)
 
 }
