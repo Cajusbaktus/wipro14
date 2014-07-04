@@ -44,7 +44,7 @@ MaO 03.07.2014 improved code (base version of Moh)
 ```{r}
 
 wp_temp_yrmean_ghcn_func <- function(data, sub=c(1961,1990),valid=100, agg_meth = 'mean') {
-
+library(reshape)
 data <- subset(data, YEAR >= sub[1] & YEAR <= sub[2])  
 
 cnt_yrs<-  sub[2]-sub[1]
