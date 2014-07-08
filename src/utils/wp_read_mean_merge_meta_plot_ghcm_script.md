@@ -47,6 +47,9 @@ http://www.statmethods.net/advgraphs/ggplot2.html
 http://www.r-bloggers.com/basic-introduction-to-ggplot2/
 
 ```{r}
-qplot(sqrt(temp_meta$LATITUDE^2), temp_meta$temperature)
+myplt<-qplot(sqrt(temp_meta$LATITUDE^2), temp_meta$temperature)
+myplt <- myplt + stat_smooth(method="lm")
+myplt
+
 ```
 
